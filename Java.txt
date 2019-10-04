@@ -1,0 +1,192 @@
+List:Duplication possible, container of mulitple elements of different data types
+ArrayList:- It inherits AbstractList class and implements List interface.
+		maintains the insertion order 	---	allows random access
+	    is non-synchronized. 	--- manipulation is slow because a lot of shifting needs to occur if any element is removed from the array list.
+
+LinkedLIST:- It inherits the AbstractList class and implements List and Deque interfaces
+		----contain duplicate elements.		---maintains insertion order	   ---Java LinkedList class can be used as a list, stack or queue.
+
+		----non synchronized		------manipulation is fast because no shifting needs to occur.
+
+
+Set Interface:It represents the unordered set of elements which doesn't allow us to store the duplicate items. We can store at most one null value in Set. 
+	Set is implemented by HashSet, LinkedHashSet, and TreeSet.
+Hashset: It represents the collection that uses a hash table for storage. Hashing is used to store the elements in the HashSet. It contains unique items.
+LinkedHashSet:It maintains the insertion order and permits null elements.No duplication
+Treeset: Like HashSet, TreeSet also contains unique elements. However, the access and retrieval time of TreeSet is quite fast. 
+	The elements in TreeSet stored in ascending order. //SortedSet<data-type> set = new TreeSet();
+
+ ArrayList<String> al=new ArrayList<String>();	//creating new generic arraylist
+Now ArrayList is forced to have the only specified type of objects in it. If you try to add another type of object, it gives compile time error.
+
+-----------------------------------------------------ARRAYLIST---------------------------------------------------------------------------------------------
+import java.util.*;  
+ class ArrayList5{  
+ public static void main(String args[]){  
+  //Creating user-defined class objects  
+  Student s1=new Student(101,"Sonoo",23);  
+  Student s2=new Student(102,"Ravi",21);  
+  Student s2=new Student(103,"Hanumat",25);  
+  //creating arraylist  
+  ArrayList<Student> al=new ArrayList<Student>();  *********************
+  al.add(s1);//adding Student class object  
+  al.add(s2);  
+  al.add(s3);  
+  //Getting Iterator  
+  Iterator itr=al.iterator();  
+  //traversing elements of ArrayList object  
+  while(itr.hasNext()){  
+    Student st=(Student)itr.next();  **********************************************need to type cast
+    System.out.println(st.rollno+" "+st.name+" "+st.age);  
+  }  
+ }  
+}
+
+Different ways to add an element.	 ArrayList<String> al=new ArrayList<String>();  
+                    			 al.add("Ravi")             
+          				 al.add(1, "Gaurav"); 		 //Adding an element at the specific position 
+
+                     			 ArrayList<String> al2=new ArrayList<String>();  
+           				 al2.add("Sonoo");  	 al2.add("Monooo");
+          				 al.addAll(al2);  	 //Adding second list elements to the first list 
+
+           				 ArrayList<String> al3=new ArrayList<String>();  
+           				 al3.add("John");  	al3.add("Rahul");  
+          				 al.addAll(1, al3);	 //Adding second list elements to the first list at specific position  
+
+al.remove("Vijay");  //Removing specific element from arraylist  
+al.remove(0)   //Removing element on the basis of specific position  
+          
+boolean isEmpty()	int indexOf(Object o)	boolean addAll()	get(int index)	set(int index, E element)	int size()
+contains()	clear()			
+
+----------------------------------------------------LINKEDLIST------------------------------------------------------------------------------------
+ ll.addFirst("Lokesh");  
+ ll.addLast("Harsh");		//Adding an element at the last position  
+ ll.removeFirst();           //Removing first element from the list  
+ ll.removeLast();
+ Iterator i=ll.descendingIterator();	//Traversing the list of elements in reverse order  
+********* ArrayList internally uses a dynamic array to store the elements
+***** Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the bits are shifted in memory
+********An ArrayList class can act as a list.	LinkedList class can act as a list and queue
+******** ArrayList is better for storing and accessing data.	LinkedList is better for manipulating data.
+
+ListIterator Interface is used to traverse the element in a backward and forward direction.
+additional methods in it are-- 	nextIndex() 	previous() 	previousIndex()		has Previous()
+
+-----------------------------------------------------------------HASHSET-------------------------------------------------------
+A list can contain duplicate elements whereas Set contains unique elements only. 
+It inherits the AbstractSet class and implements Set interface.
+non synchronized
+allows null value		 non synchronized
+doesn't maintain the insertion order
+o	HashSet is the best approach for search operations.
+o	HashSet stores the elements by using a mechanism called hashing.
+o	HashSet. Here, elements are inserted on the basis of their hashcode.
+The LinkedHashSet class extends HashSet class.
+permits null elements.
+non synchronized.
+maintains insertion order.
+---------------------------------------TREESET------------------------------------------------------
+ It inherits AbstractSet class and implements the NavigableSet interface.
+ doesn't allow null element
+non synchronized.
+maintains ascending order
+------------------------------------------HASHMAP--------------------------------------------------
+Each key and value pair is known as an entry.There are two interfaces for implementing Map in java: Map and SortedMap, 
+					     and three classes: HashMap, LinkedHashMap, and TreeMap.
+****HashMap and LinkedHashMap allow null keys and values, but TreeMap doesn't allow any null key or value.
+*****A Map can't be traversed, so you need to convert it into Set using  keySet() or entrySet() method.
+
+	HashMap------HashMap is the implementation of Map, but it doesn't maintain any order.
+	LinkedHashMap---------LinkedHashMap is the implementation of Map. It inherits HashMap class. It maintains insertion order.
+	TreeMap----------TreeMap is the implementation of Map and SortedMap. It maintains ascending order.
+
+******boolean containsKey(Object key)		V replace(K key, V value)
+***Entry is the subinterface of Map. So we will be accessed it by Map.Entry name. It returns a collection-view of the map, whose elements are of this class
+		getKey()	getValue()	setValue()
+
+	Java HashMap class may have one null key and multiple null values.
+	Java HashMap class is non synchronized.
+	Java HashMap class maintains no order.
+	The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+ boolean containsValue(Object value)		boolean containsKey(Object Key)
+****Hashing is the process of converting an object into an integer value. The integer value helps in indexing and faster searches.
+**It uses an array and LinkedList data structure internally for storing Key and Value. There are four fields in HashMap.(value of hash, key,value and next node pointer)
+	HashMap contains an array of the nodes, and the node is represented as a class. HashCode is generated using the key.
+******** If you override the equals() method, then it is mandatory to override the hashCode() method.Hash code of null Key is 0.
+Buckets: Array of the node is called buckets. Each node has a data structure like a LinkedList. More than one node can share the same bucket. 
+	It may be different in capacity.
+#HashCollision-calculated index value is the same for two or more Keys.
+--------------------------------------------------LINKEDHASHMAP------------------------------------------------------------------------
+Java LinkedHashMap contains values based on the key.
+Java LinkedHashMap contains unique elements.
+Java LinkedHashMap may have one null key and multiple null values.
+Java LinkedHashMap is non synchronized.
+Java LinkedHashMap maintains insertion order.
+
+Java TreeMap contains values based on the key. It implements the NavigableMap interface and extends AbstractMap class.
+Java TreeMap contains only unique elements.
+Java TreeMap cannot have a null key but can have multiple null values.
+Java TreeMap is non synchronized.
+Java TreeMap maintains ascending order.
+
+A Hashtable is an array of a list. Each list is known as a bucket. The position of the bucket is identified by calling the hashcode() method. A Hashtable contains values based on the key.
+Java Hashtable class contains unique elements.
+Java Hashtable class doesn't allow null key or value.
+Java Hashtable class is synchronized.
+HashMap inherits AbstractMap class.	Hashtable inherits Dictionary class.
+
+--------------------------------------------------------------------------Exception Handling---------------------------------------------------------------
+There are several reasons behind the occurrence of exceptions. These are some conditions where an exception occurs:
+	Whenever a user provides invalid data.
+	The file requested to be accessed does not exist in the system.
+	When the Java Virtual Machine (JVM) runs out of memory.
+	Network drops in the middle of communication.
+
+public String getMessage() – Provides information about the exception that has occurred through a message, which is initialized in the Throwable constructor.
+public Throwable getCause() – Provides root cause of the exception as represented by a Throwable object.
+public void printStackTrace() – Used to display the output of toString() along with the stack trace to System.err (error output stream).
+public StackTraceElement [] getStackTrace() – Returns an array with each element present on the stack trace. 
+The index 0 element will symbolize the top of the call stack, and the last element of array will identify the bottom of the call stack.
+
+Checked exceptions are also known as compile-time exceptions as these exceptions are checked by the compiler during the compilation process to confirm 
+whether the exception is handled by the programmer or not. 
+
+_--------------------Property file----------------------
+Properties prop = new Properties();
+prop.load(...); // FileInputStream 
+prop.setProperty("key", "value");
+prop.store(...); // FileOutputStream 
+
+
+XML, or EXtensible Markup Language, is a platform-independent way to represent data. Simply put, XML enables you to create data that can read by any 
+application on any platform. You can even edit and create it by hand, because it is based on the same tag-based technology that underlies HTML.
+Even without a special application, you can see the content (in bold) and the markup, which describes it.
+
+Why JSON is Better Than XML
+XML is much more difficult to parse than JSON.
+JSON is parsed into a ready-to-use JavaScript object
+Parsing  a xml:It means "reading" the XML file/string and getting its content according to the structure, usually to use them in a program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

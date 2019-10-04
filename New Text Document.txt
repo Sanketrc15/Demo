@@ -1,0 +1,129 @@
+Set Interface:It represents the unordered set of elements which doesn't allow us to store the duplicate items. We can store at most one null value in Set. 
+	Set is implemented by HashSet, LinkedHashSet, and TreeSet.
+hashset: It represents the collection that uses a hash table for storage. Hashing is used to store the elements in the HashSet. It contains unique items.
+LinkedHashSet:It maintains the insertion order and permits null elements.
+Tree
+
+Hibernate::
+@RequestParam used for accessing the values of the query parameters where as @PathVariable used for accessing the values from the URI template.
+	URL:http://localhost:8080/springmvc/hello/101?param1=10&param2=20
+	@RequestParam(value="param1", required=true) String param1,
+        @RequestParam(value="param2", required=false) String param2)
+@PathVariable identifies the pattern that is used in the URI for the incoming request.
+	http://localhost:8080/springmvc/hello/101?param1=10&amp;param2=20
+			The above URL request can be written in your Spring MVC as below:
+	@RequestMapping("/hello/{id}")
+	public String getDetails(@PathVariable(value="id") String id,
+	@RequestParam(value="param1", required=true) String param1
+
+*********If you want to understand the difference between @PathParam and @QueryParam, the above two annotations are defined in JAX-RS implementations for the exact 
+purpose of @PathVariable and @RequestParam which is defined in spring’s REST implementations.
+
+		@RequestParam just populates stand-alone variables (which may of course be fields in a @ModelAttribute class). These variables will be thrown away 
+when the Controller is done, unless they have been fed into the model.
+Don't confuse the word "model" with session. The http conversation is generally: HTTP.GET, server response, then HTTP.POST. When you have the 
+----@ModelAttribute annotation in use you are always constructing an instance of whatever you have annotated, this is what makes you think that 
+'feeding things to the model' might make variables stick around. This isn't correct, once the HttpServletRequest has finished those variables 
+should no longer be a part of the browser/server conversation unless they've been saved in a session.
+----@ModelAttribute populates the fields of a class, which then populates an attribute of the model to be passed back to the view
+Yes! To be correct, @ModelAttribute tells Spring to use its default web data binder to populate an instance of something with data from the 
+HttpServletRequest. Choosing to pass this data back to the view is up to the programmer. When you have a method annotated with @ModelAttribute, 
+it is being called every time code hits that servlet. When you have @ModelAttribute as one of the method's parameters, we are talking about incoming Http 
+form data-binding.
+Calling @RequestParam is a shortcut for saying request.getParameter("foo"); under the hood, Java's HttpServletRequest lets you get values from the request 
+object by doing a key->value look up. The value returned is of type Object. This is what you would be typing a lot if you were not using Spring in your web 
+application.
+
+****	Methods annotated with @ModelAttribute
+This method is called before every @RequestMapping-annotated handler method to add an initial object to the model, which is then pushed through to 
+the JSP. Notice the word every in the above sentence. The @ModelAttribute-annotated methods (and you can have more than one per controller) get called 
+irrespective of whether or not the handler (other methods in controller class) method or JSP uses the data.Bear in mind that this could possibly degrade 
+application performance by making unnecessary database calls etc. It’s, therefore, advisable to use this technique only when each handler call in your 
+Controller class needs the same common information adding to the model for every page request.
+
+
+Q)***What are @RequestBody and @ResponseBody for?
+They are annotations of the spring mvc framework and can be used in a controller to implement smart object serialization and deserialization. They help 
+you avoid boilerplate code by extracting the logic of messageconversion and making it an aspect. Other than that they help you support multiple formats 
+for a single REST resource without duplication of code. If you annotate a method with @ResponseBody, spring will try to convert its return value and write 
+it to the http response automatically. If you annotate a methods parameter with @RequestBody, spring will try to convert the content of the incoming 
+request body to your parameter object on the fly.
+The @ResponseBody annotation tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
+@RequestBody annotation maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the inbound HttpRequest body onto a 
+Java object.
+
+****The simplest way for my understanding is, the @ModelAttribute will take a query string. so, all the data are being pass to the server through the url.
+As for @RequestBody, all the data will be pass to the server through a full JSON body.
+
+-------------------------------------------------------- URI and URL   ------------------------------------------
+A URI can be further classified as a locator, a name, or both. The term "Uniform Resource Locator" (URL) refers to the subset of URIs that, in addition 
+to identifying a resource, provide a means of locating the resource by describing its primary access mechanism (e.g., its network "location").
+URIs identify and URLs locate; however, locators are also identifiers, so every URL is also a URI, but there are URIs which are not URLs.
+URL is more specific than URI.
+
+A path component, consisting of a sequence of path segments separated by a slash (/). A path is always defined for a URI, though the defined path may be
+empty (zero length). A segment may also be empty, resulting in two consecutive slashes (//) in the path component. A path component may resemble or map 
+exactly to a file system path, but does not always imply a relation to one.
+	An optional query component preceded by a question mark (?), containing a query string of non-hierarchical data. Its syntax is not well defined, but by 
+convention is most often a sequence of attribute–value pairs separated by a delimiter.
+
+An optional fragment component preceded by a hash (#). The fragment contains a fragment identifier providing direction to a secondary resource, such as a 
+section heading in an article identified by the remainder of the URI. When the primary resource is an HTML document, the fragment is often an id attribute 
+of a specific element, and web browsers will scroll this element into view.
+
+**RESTful basically works on the HTTP web layer and uses the below key verbs to work with resources on the server
+
+POST - To create a resource on the server
+GET - To retrieve a resource from the server
+PUT - To change the state of a resource or to update it
+DELETE - To remove or delete a resource from the server
+
+**The @Path annotation is used to specify the URI through which a resource and an API can be accessed. Resource in this case is the REST Web service itself.
+Thus this annotation is present at the class level as well as the method level. It is mandatory to annotate a REST Web resource class with the @Path 
+annotation
+
+Getting query parameters in REST --     1)@Queryparam
+					2)query parameters grammatically, via “@Context UriInfo“
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

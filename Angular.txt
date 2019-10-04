@@ -1,0 +1,3 @@
+FormGroup is one of the three fundamental building blocks used to define forms in Angular, along with FormControl and FormArray.
+A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key. It calculates its status by reducing the 
+status values of its children. For example, if one of the controls in a group is invalid, the entire group becomes invalid
